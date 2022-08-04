@@ -2,25 +2,27 @@
 
 directory_structure() {
 
-    read -p "Pass the parent directory name:" parent_dir
-    read -p "How many 1st level child directory you want?" count
+    read -p "Enter parent dir name and child dir count at level-1:" parent_dir count
     while [[ $count -ge 1 ]]; do
         read -p "pass the child dir name:" child_dir
-        mkdir -p ./$parent_dir/$child_dir
+        mkdir -p $1/$parent_dir/$child_dir
         ((count--))
     done
 }
-#create project directory with first level child dir under current directory
-# if [[ $# -eq 0 ]]; then
-#     echo "Usage: $0 parent_dir child_dir etc"
-# fi
-read -p "Confirm: Press 'Y' for filelayout creation in current directory else 'N' " input
-case $input in
+
+if [[ $# -eq 0 ]]; then
+    echo "Usage: $0 followed by Y/N"
+    echo "'Y'=>Create dir and sub-dir at current working dir\n'N'=>Elsewhere"
+    exit
+fi
+
+case $1 in
 [yY])
-    directory_structure
+    directory_structure "."
     ;;
 [nN])
-    read -p "Provide the complete target path." path
+    read -p "Provide the complete target path:" path
+    directory_structure $path #check in future for /at the end of input.
     ;;
 *)
     echo "Wrong Input."
@@ -28,11 +30,10 @@ case $input in
 esac
 
 for (( ; ; )); do
-
     read -p "Press Y/N to continue/exit:" choice
     case $choice in
     [yY])
-        directory_structure
+        directory_structure #Need to modify this section
         ;;
     [nN])
         echo "Directory creation complete!"
