@@ -13,7 +13,6 @@ for (( ; ; )); do
     case $choice in
     [yY])
         directory_structure
-        # sub_directory $parent_dir $sub_dir #Need to modify this section
         ;;
     [nN])
         echo "Directory creation complete!"
