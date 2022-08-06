@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 directory_structure() {
     read -p "provide the path address:" path
-    read -p "Provide the directory's name at a given path" -a directory
+    read -p "Provide the directory's name(separated by space) at a given path" -a directory
     for i in ${directory[@]}; do
         mkdir -p $path/$i
     done
